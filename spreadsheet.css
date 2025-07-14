@@ -336,11 +336,11 @@ h1, h2, h3, h4 {
 .category-btn {
     background: transparent;
     border: none;
-    color: #999;
+    color: #555;
     padding: 0.8rem 0;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 0.9rem;
     letter-spacing: 1px;
     border-bottom: 1px solid transparent;
@@ -351,6 +351,11 @@ h1, h2, h3, h4 {
 .category-btn.active {
     color: #2c1810;
     border-bottom-color: #2c1810;
+}
+
+.category-btn:hover:not(.active) {
+    color: #333;
+    border-bottom-color: #ccc;
 }
 
 .portfolio-grid {
@@ -843,13 +848,13 @@ h1, h2, h3, h4 {
 }
 
 .tab-btn {
-    background: transparent;
-    border: 1px solid #e0e0e0;
-    color: #666;
+    background: #f8f8f8;
+    border: 1px solid #d0d0d0;
+    color: #444;
     padding: 0.8rem 1.5rem;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-weight: 300;
+    font-weight: 400;
     font-size: 0.9rem;
     letter-spacing: 1px;
     border-radius: 25px;
@@ -861,6 +866,13 @@ h1, h2, h3, h4 {
     color: white;
     border-color: #2c1810;
     transform: translateY(-2px);
+}
+
+.tab-btn:hover:not(.active) {
+    background: #e8e8e8;
+    color: #2c1810;
+    border-color: #bbb;
+    transform: translateY(-1px);
 }
 
 /* Shop Portfolio Grid */
@@ -2142,4 +2154,202 @@ html {
 .nav-link:focus {
     outline: 1px solid #8b6f47;
     outline-offset: 2px;
+}
+
+/* Particle Animation Styles */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(139, 111, 71, 0.6);
+    border-radius: 50%;
+    animation: float 15s infinite linear;
+    opacity: 1;
+}
+
+.particle:nth-child(odd) {
+    background: rgba(44, 24, 16, 0.4);
+    animation-duration: 20s;
+}
+
+.particle:nth-child(3n) {
+    background: rgba(254, 254, 254, 0.8);
+    animation-duration: 12s;
+}
+
+.particle:nth-child(4n) {
+    background: rgba(139, 111, 71, 0.3);
+    animation-duration: 18s;
+}
+
+.particle:nth-child(5n) {
+    background: rgba(44, 24, 16, 0.2);
+    animation-duration: 25s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) translateX(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(100px) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+@keyframes floatLeft {
+    0% {
+        transform: translateY(100vh) translateX(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(-100px) rotate(-360deg);
+        opacity: 1;
+    }
+}
+
+@keyframes scatter {
+    0% {
+        transform: translateY(100vh) translateX(0) rotate(0deg) scale(0.8);
+        opacity: 1;
+    }
+    20% {
+        opacity: 1;
+        transform: translateY(80vh) translateX(20px) rotate(90deg) scale(1);
+    }
+    50% {
+        transform: translateY(50vh) translateX(-30px) rotate(180deg) scale(1.2);
+    }
+    80% {
+        transform: translateY(20vh) translateX(50px) rotate(270deg) scale(0.8);
+    }
+    100% {
+        transform: translateY(-20vh) translateX(-20px) rotate(360deg) scale(0.8);
+        opacity: 1;
+    }
+}
+
+/* Section-specific particle styles */
+.hero {
+    position: relative;
+}
+
+.hero .particles .particle {
+    animation-name: float;
+}
+
+.hero .particles .particle:nth-child(even) {
+    animation-name: floatLeft;
+}
+
+.about {
+    position: relative;
+}
+
+.about .particles .particle {
+    background: rgba(139, 111, 71, 0.4);
+    animation-name: scatter;
+}
+
+.about .particles .particle:nth-child(3n) {
+    background: rgba(44, 24, 16, 0.3);
+}
+
+.portfolio {
+    position: relative;
+}
+
+.portfolio .particles .particle {
+    background: rgba(254, 254, 254, 0.7);
+    animation-name: float;
+}
+
+.portfolio .particles .particle:nth-child(odd) {
+    background: rgba(139, 111, 71, 0.5);
+    animation-name: floatLeft;
+}
+
+.services {
+    position: relative;
+}
+
+.services .particles .particle {
+    background: rgba(139, 111, 71, 0.3);
+    animation-name: scatter;
+}
+
+.services .particles .particle:nth-child(even) {
+    background: rgba(44, 24, 16, 0.2);
+    animation-name: float;
+}
+
+.shop {
+    position: relative;
+}
+
+.shop .particles .particle {
+    background: rgba(139, 111, 71, 0.4);
+    animation-name: floatLeft;
+}
+
+.shop .particles .particle:nth-child(3n) {
+    background: rgba(254, 254, 254, 0.6);
+    animation-name: scatter;
+}
+
+.contact {
+    position: relative;
+}
+
+.contact .particles .particle {
+    background: rgba(44, 24, 16, 0.3);
+    animation-name: float;
+}
+
+.contact .particles .particle:nth-child(odd) {
+    background: rgba(139, 111, 71, 0.4);
+    animation-name: floatLeft;
+}
+
+/* Responsive particle sizes */
+.particle {
+    width: 4px;
+    height: 4px;
+}
+
+.particle:nth-child(2n) {
+    width: 6px;
+    height: 6px;
+}
+
+.particle:nth-child(3n) {
+    width: 3px;
+    height: 3px;
+}
+
+.particle:nth-child(4n) {
+    width: 8px;
+    height: 8px;
+}
+
+.particle:nth-child(5n) {
+    width: 2px;
+    height: 2px;
+}
+
+/* Reduce particles on mobile */
+@media (max-width: 768px) {
+    .particle:nth-child(n+15) {
+        display: none;
+    }
 }

@@ -164,3 +164,64 @@ shopTabs.forEach(tab => {
         });
     });
 });
+
+
+// Particle Animation System
+function createParticles(sectionSelector, particleCount = 20) {
+    const section = document.querySelector(sectionSelector);
+    if (!section) return;
+    
+    // Create particles container
+    const particlesContainer = document.createElement('div');
+    particlesContainer.className = 'particles';
+    
+    // Create individual particles
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Random positioning
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        
+        particlesContainer.appendChild(particle);
+    }
+    
+    section.appendChild(particlesContainer);
+}
+
+// Initialize particles for all sections
+document.addEventListener('DOMContentLoaded', function() {
+    // Create particles for each section
+    createParticles('.hero', 25);
+    createParticles('.about', 20);
+    createParticles('.portfolio', 30);
+    createParticles('.services', 20);
+    createParticles('.shop', 25);
+    createParticles('.contact', 15);
+    
+    // Intersection Observer for particle animation triggers
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const particles = entry.target.querySelectorAll('.particle');
+                particles.forEach((particle, index) => {
+                    setTimeout(() => {
+                        particle.style.animationPlayState = 'running';
+                    }, index * 100);
+                });
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all sections with particles
+    document.querySelectorAll('.hero, .about, .portfolio, .services, .shop, .contact').forEach(section => {
+        observer.observe(section);
+    });
+});
