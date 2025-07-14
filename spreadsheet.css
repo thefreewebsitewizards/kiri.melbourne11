@@ -2170,19 +2170,19 @@ html {
 
 .particle {
     position: absolute;
-    background: rgba(139, 111, 71, 0.6);
+    background: rgba(179, 130, 63, 0.6);
     border-radius: 50%;
     animation: float 15s infinite linear;
     opacity: 1;
 }
 
 .particle:nth-child(odd) {
-    background: rgba(44, 24, 16, 0.4);
+    background: rgba(150, 93, 70, 0.4);
     animation-duration: 20s;
 }
 
 .particle:nth-child(3n) {
-    background: rgba(254, 254, 254, 0.8);
+    background: rgba(218, 151, 112, 0.8);
     animation-duration: 12s;
 }
 
