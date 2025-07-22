@@ -362,38 +362,29 @@ document.addEventListener('DOMContentLoaded', function() {
             // Detect if user is on mobile
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             
-            // For mobile devices, try different approaches
+            // Create mailto link for better mobile compatibility
+            const mailtoLink = `mailto:kiriimai.art@gmail.com?subject=${subject}&body=${body}`;
+            
             if (isMobile) {
-                // Try to open Gmail app first, fallback to web
-                const gmailAppLink = `googlegmail://co?to=kiriimai.art@gmail.com&subject=${subject}&body=${body}`;
+                // On mobile, use mailto which works more reliably
+                window.location.href = mailtoLink;
                 
-                // Create a temporary link to test if Gmail app is available
-                const tempLink = document.createElement('a');
-                tempLink.href = gmailAppLink;
-                tempLink.style.display = 'none';
-                document.body.appendChild(tempLink);
-                
-                // Try to open Gmail app
-                try {
-                    tempLink.click();
-                    // If Gmail app doesn't open within 2 seconds, open web version
-                    setTimeout(() => {
-                        window.open(gmailLink, '_blank');
-                    }, 2000);
-                } catch (error) {
-                    // Fallback to web Gmail
+                // Also try to open Gmail web as backup after a short delay
+                setTimeout(() => {
                     window.open(gmailLink, '_blank');
-                }
-                
-                document.body.removeChild(tempLink);
+                }, 1000);
             } else {
-                // Desktop: Open Gmail in new tab
-                window.open(gmailLink, '_blank');
+                // Desktop: Try Gmail web first, fallback to mailto
+                try {
+                    window.open(gmailLink, '_blank');
+                } catch (error) {
+                    window.location.href = mailtoLink;
+                }
             }
             
             // Show success message with mobile-friendly text
             const successMessage = isMobile 
-                ? 'Thank you for your enquiry! Gmail will open with your commission details pre-filled. If the Gmail app doesn\'t open, please check your browser for a new tab with Gmail web.'
+                ? 'Thank you for your enquiry! Your default email app will open with the commission details pre-filled. If it doesn\'t open automatically, please check for a new browser tab with Gmail.'
                 : 'Thank you for your enquiry! Gmail will open in a new tab with your commission details pre-filled. Please review and send the email to complete your enquiry.';
             
             alert(successMessage);
