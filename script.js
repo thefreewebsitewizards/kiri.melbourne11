@@ -359,11 +359,44 @@ document.addEventListener('DOMContentLoaded', function() {
             const body = encodeURIComponent(emailBody);
             const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=kiriimai.art@gmail.com&su=${subject}&body=${body}`;
             
-            // Open Gmail in new tab
-            window.open(gmailLink, '_blank');
+            // Detect if user is on mobile
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             
-            // Show success message
-            alert('Thank you for your enquiry! Gmail will open in a new tab with your commission details pre-filled. Please review and send the email to complete your enquiry.');
+            // For mobile devices, try different approaches
+            if (isMobile) {
+                // Try to open Gmail app first, fallback to web
+                const gmailAppLink = `googlegmail://co?to=kiriimai.art@gmail.com&subject=${subject}&body=${body}`;
+                
+                // Create a temporary link to test if Gmail app is available
+                const tempLink = document.createElement('a');
+                tempLink.href = gmailAppLink;
+                tempLink.style.display = 'none';
+                document.body.appendChild(tempLink);
+                
+                // Try to open Gmail app
+                try {
+                    tempLink.click();
+                    // If Gmail app doesn't open within 2 seconds, open web version
+                    setTimeout(() => {
+                        window.open(gmailLink, '_blank');
+                    }, 2000);
+                } catch (error) {
+                    // Fallback to web Gmail
+                    window.open(gmailLink, '_blank');
+                }
+                
+                document.body.removeChild(tempLink);
+            } else {
+                // Desktop: Open Gmail in new tab
+                window.open(gmailLink, '_blank');
+            }
+            
+            // Show success message with mobile-friendly text
+            const successMessage = isMobile 
+                ? 'Thank you for your enquiry! Gmail will open with your commission details pre-filled. If the Gmail app doesn\'t open, please check your browser for a new tab with Gmail web.'
+                : 'Thank you for your enquiry! Gmail will open in a new tab with your commission details pre-filled. Please review and send the email to complete your enquiry.';
+            
+            alert(successMessage);
             
             // Close modal and reset form
              closeCommissionModal();

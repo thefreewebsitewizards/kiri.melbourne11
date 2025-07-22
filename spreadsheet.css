@@ -1659,11 +1659,20 @@ h1, h2, h3, h4 {
         min-height: 48px; /* Touch-friendly size */
         border-radius: 8px;
         box-shadow: 0 4px 15px rgba(44, 24, 16, 0.2);
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+        touch-action: manipulation;
     }
 
-    .cta-button:hover {
+    .cta-button:hover,
+    .cta-button:active {
         transform: translateY(-2px);
         box-shadow: 0 8px 25px rgba(44, 24, 16, 0.3);
+    }
+    
+    .cta-button:active {
+        transform: translateY(0);
+        transition: transform 0.1s ease;
     }
 
     /* Compact Featured Grid */
@@ -3651,6 +3660,15 @@ body.activities-page .particles .particle:nth-child(4n) {
         font-size: 1rem;
         border-radius: 22px;
         min-height: 50px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+        touch-action: manipulation;
+        transition: all 0.2s ease;
+    }
+    
+    .form-actions button:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
     }
     
     .form-actions .cta-button {
